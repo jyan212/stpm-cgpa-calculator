@@ -1,2 +1,2 @@
 # stpm-cgpa-calculator
-STPM CGPA CALCULATOR
+STPM CGPA CALCULATOR run by react-native
