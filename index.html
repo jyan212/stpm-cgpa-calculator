@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STPM POINTER CALCULATOR</title>
+        <style> 
+        * {
+            font-size:23px;
+        }
+        input {
+            width:6%;
+        }
+        </style>
+    </head>
+    <body style="position:relative">
+        <div style="position:absolute;left:10px">
+        <p>Please enter your subject grade!</p>
+        <form name='form'>
+             Pengajian Am: Sem 1 <input type='text' id="pa_1" /> Sem 2 <input type='text' id="pa_2"/> Sem 3<input type='text' id="pa_3"/>  </br>
+             Physics: Sem 1 <input type='text' id="py_1" /> Sem 2 <input type='text' id="py_2"/> Sem 3<input type='text' id="py_3"/> </br>
+             Chemistry : Sem 1 <input type='text' id="ch_1" /> Sem 2 <input type='text' id="ch_2"/> Sem 3<input type='text' id="ch_3"/>  </br>
+             Math T: Sem 1 <input type='text' id="mt_1" /> Sem 2 <input type='text' id="mt_2"/> Sem 3<input type='text' id="mt_3"/> </br>
+            <button type="button" onclick="toSubmit()">Submit</button>
+        </form>
+    </div>
+        <div style="position:absolute;right:10px">
+            <h1>Not working now pls dont use ! AHAHAHA</h1>
+            <h1>take this as reference</h1>
+            <form name='mark-value'>
+                A: <input type="text" id="a_l" value="" disabled="true"/> to <input type="text" id="a_h" disabled="true"/> <br />
+                A-:<input type="text" id="aMin_l" value="" disabled="true"/> to <input type="text" id="aMin_h" disabled="true"/> <br />
+                B+:<input type="text" id="bPlus_l" value="" disabled="true"/> to <input type="text" id="bPlus_h" disabled="true"/><br />
+                B:<input type="text" id="b_l" value="" disabled="true"/> to <input type="text" id="b_h"disabled="true" /><br />
+                B-:<input type="text" id="bMin_l" value="" disabled="true"/> to <input type="text" id="bMin_h" disabled="true"/><br />
+                C+:<input type="text" id="cPlus_l" value="" disabled="true"/> to <input type="text" id="cPlus_h" disabled="true" /><br />
+                C:<input type="text" id="c_l" value="" disabled="true"/> to <input type="text" id="c_h" disabled="true"/><br />
+                C-:<input type="text" id="cMin_l" value="" disabled="true"/> to <input type="text" id="cMin_h" disabled="true"/><br />
+                D+:<input type="text" id="dPlus_l" value="" disabled="true"/> to <input type="text" id="dPlus_h" disabled="true"/><br />
+                D:<input type="text" id="d_l" value="" disabled="true"/> to <input type="text" id="d_h" disabled="true"/><br />
+                F:<input type="text" id="f_l" value="" disabled="true"/> to <input type="text" id="f_h" disabled="true"/><br />
+                <input type="button" style="width:150px" onclick="toChange()" value="Change"  disabled="true"/>
+                <input type="button" style="width:150px"onclick="toDefault()" value="Default"  disabled="true"/>
+
+            </form>
+        </div>
+        <script>
+        var pa = [];
+        var py = [];
+        var ch = [];
+        var mt = [];
+        
+       function toChange(){
+           gradeValue.A = document.getElementById('a_l').value
+           gradeValue.aMin = document.getElementById('aMin_l').value
+           gradeValue.bPlus = document.getElementById('bPlus_l').value
+           gradeValue.B = document.getElementById('b_l').value
+           gradeValue.bMin = document.getElementById('bMin_l').value
+           gradeValue.cPlus = document.getElementById('cPlus_l').value
+           gradeValue.C = document.getElementById('c_l').value
+           gradeValue.cMin = document.getElementById('cMin_l').value
+           gradeValue.dPlus = document.getElementById('dPlus_l').value
+           gradeValue.D = document.getElementById('d_l').value
+           gradeValue.f = document.getElementById('f').value  
+
+      //update
+      document.getElementById('a_h').value = gradeValue.max
+        document.getElementById('a_l').value = gradeValue.A
+        document.getElementById('aMin_h').value = gradeValue.A - 1
+        document.getElementById('aMin_l').value = gradeValue.aMin
+        document.getElementById('bPlus_h').value = gradeValue.aMin - 1
+        document.getElementById('bPlus_l').value = gradeValue.bPlus
+        document.getElementById('b_h').value = gradeValue.bPlus - 1
+        document.getElementById('b_l').value = gradeValue.B
+        document.getElementById('bMin_h').value = gradeValue.B -1
+        document.getElementById('bMin_l').value = gradeValue.bMin 
+        document.getElementById('cPlus_h').value = gradeValue.bMin -1
+        document.getElementById('cPlus_l').value = gradeValue.cPlus 
+        document.getElementById('c_h').value = gradeValue.cPlus -1
+        document.getElementById('c_l').value = gradeValue.C
+        document.getElementById('cMin_h').value = gradeValue.C -1
+        document.getElementById('cMin_l').value = gradeValue.cMin
+        document.getElementById('dPlus_h').value = gradeValue.cMin -1
+        document.getElementById('dPlus_l').value = gradeValue.dPlus 
+        document.getElementById('d_h').value = gradeValue.dPlus -1
+        document.getElementById('d_l').value = gradeValue.D 
+        document.getElementById('f_h').value = gradeValue.D -1
+        document.getElementById('f').value = gradeValue.f 
+       };
+       function toDefault(){
+           //set to default
+           gradeValue = defaultGradeValue;
+           document.getElementById('a_h').value = gradeValue.max
+        document.getElementById('a_l').value = gradeValue.A
+        document.getElementById('aMin_h').value = gradeValue.A - 1
+        document.getElementById('aMin_l').value = gradeValue.aMin
+        document.getElementById('bPlus_h').value = gradeValue.aMin - 1
+        document.getElementById('bPlus_l').value = gradeValue.bPlus
+        document.getElementById('b_h').value = gradeValue.bPlus - 1
+        document.getElementById('b_l').value = gradeValue.B
+        document.getElementById('bMin_h').value = gradeValue.B -1
+        document.getElementById('bMin_l').value = gradeValue.bMin 
+        document.getElementById('cPlus_h').value = gradeValue.bMin -1
+        document.getElementById('cPlus_l').value = gradeValue.cPlus 
+        document.getElementById('c_h').value = gradeValue.cPlus -1
+        document.getElementById('c_l').value = gradeValue.C
+        document.getElementById('cMin_h').value = gradeValue.C -1
+        document.getElementById('cMin_l').value = gradeValue.cMin
+        document.getElementById('dPlus_h').value = gradeValue.cMin -1
+        document.getElementById('dPlus_l').value = gradeValue.dPlus 
+        document.getElementById('d_h').value = gradeValue.dPlus -1
+        document.getElementById('d_l').value = gradeValue.D 
+        document.getElementById('f_h').value = gradeValue.D -1
+        document.getElementById('f').value = gradeValue.f 
+       }
+        
+        
+        function toGradeValue(g){
+            switch(g){
+                case 'A': 
+                return gradeValue.A
+                break;
+                case 'A-': 
+                return gradeValue.aMin
+                break;
+                case 'B+': 
+                return gradeValue.bPlus
+                break;
+                case 'B': 
+                return gradeValue.B
+                break;
+                case 'B-': 
+                return gradeValue.bMin
+                break;
+                case 'C+': 
+                return gradeValue.cPlus
+                break;
+                case 'C': 
+                return gradeValue.C
+                break;
+                case 'C-': 
+                return gradeValue.cMin
+                break;
+                case 'D+': 
+                return gradeValue.dPlus
+                break;
+                case 'D': 
+                return gradeValue.D
+                break;
+                case 'F':
+                return gradeValue.f
+                break;
+                default : confirm('Have you enter all your subject grade?')
+
+            }
+        }
+        function toMaxGradeValue(g){
+            switch(g){
+                case 'A': 
+                return gradeValue.max
+                break;
+                case 'A-': 
+                return gradeValue.A - 1
+                break;
+                case 'B+': 
+                return gradeValue.aMin - 1
+                break;
+                case 'B': 
+                return gradeValue.bPlus - 1
+                break;
+                case 'B-': 
+                return gradeValue.B - 1
+                break;
+                case 'C+': 
+                return gradeValue.bMin- 1
+                break;
+                case 'C': 
+                return gradeValue.cPlus - 1
+                break;
+                case 'C-': 
+                return gradeValue.C - 1
+                break;
+                case 'D+': 
+                return gradeValue.cMin - 1
+                break;
+                case 'D': 
+                return gradeValue.dPlus - 1
+                break;
+                case 'F':
+                return gradeValue.D - 1
+                break;
+               
+
+            }
+        }
+        function pointerCalculator(pa,py,ch,mt){
+            return (pa+py+ch+mt)/4
+        }
+        function toPointer(g){
+            switch(g){
+                case 'A': 
+                return gradePointer.A
+                break;
+                case 'A-': 
+                return gradePointer.aMin
+                break;
+                case 'B+': 
+                return gradePointer.bPlus
+                break;
+                case 'B': 
+                return gradePointer.B
+                break;
+                case 'B-': 
+                return gradePointer.bMin
+                break;
+                case 'C+': 
+                return gradePointer.cPlus
+                break;
+                case 'C': 
+                return gradePointer.C
+                break;
+                case 'C-': 
+                return gradePointer.cMin
+                break;
+                case 'D+': 
+                return gradePointer.dPlus
+                break;
+                case 'D': 
+                return gradePointer.D
+                break;
+                case 'F':
+                return gradePointer.f
+                break;
+                
+
+            }
+        }
+        function toOverallGrade(g){
+            switch(true){
+                case g== gradeValue.max:
+                return "A";
+                break;
+                case g >= gradeValue.A && g < gradeValue.max :
+                return "A";
+                break;
+                case g >= gradeValue.aMin && g < gradeValue.A:
+                return "A-";
+                break;
+                case g >= gradeValue.bPlus && g < gradeValue.aMin :
+                return "B+";
+                break;
+                case g >= gradeValue.B && g < gradeValue.bPlus :
+                return "B";
+                break;
+                case g >= gradeValue.bMin && g < gradeValue.B :
+                return "B-";
+                break;
+                case g >= gradeValue.cPlus && g < gradeValue.bMin :
+                return "C+";
+                break;
+                case g >= gradeValue.C && g < gradeValue.cPlus :
+                return "C";
+                break;
+                case g >= gradeValue.cMin && g < gradeValue.C :
+                return "C-";
+                break;
+                case g >= gradeValue.dPlus && g < gradeValue.cMin :
+                return "D+";
+                break;
+                case g >= gradeValue.D && g < gradeValue.dPlus :
+                return "D";
+                break;
+                case g >= gradeValue.f && g < gradeValue.D :
+                return "F";
+                break;
+            }
+        }
+        function toSubmit(){
+             pa = [];
+             py = [];
+             ch = [];
+             mt = [];
+            pa.push(document.getElementById('pa_1').value,document.getElementById('pa_2').value,document.getElementById('pa_3').value);
+            py.push(document.getElementById('py_1').value,document.getElementById('py_2').value,document.getElementById('py_3').value);
+            ch.push(document.getElementById('ch_1').value,document.getElementById('ch_2').value,document.getElementById('ch_3').value);
+            mt.push(document.getElementById('mt_1').value,document.getElementById('mt_2').value,document.getElementById('mt_3').value);
+//sem1 Min
+          var paMinOverall = toGradeValue(pa[0]) * subjectData[1].semOneWeight + toGradeValue(pa[1]) * subjectData[1].semTwoWeight + toGradeValue(pa[2]) * subjectData[1].semThreeWeight + toGradeValue("A") * subjectData[1].cwWeight;
+          var pyMinOverall = toGradeValue(py[0]) * subjectData[0].semOneWeight + toGradeValue(py[1]) * subjectData[0].semTwoWeight + toGradeValue(py[2]) * subjectData[0].semThreeWeight+ toGradeValue("A") * subjectData[0].cwWeight;
+          var chMinOverall = toGradeValue(ch[0]) * subjectData[0].semOneWeight + toGradeValue(ch[1]) * subjectData[0].semTwoWeight + toGradeValue(ch[2]) * subjectData[0].semThreeWeight + toGradeValue("A") * subjectData[0].cwWeight;
+          var mtMinOverall = toGradeValue(mt[0]) * subjectData[0].semOneWeight + toGradeValue(mt[1]) * subjectData[0].semTwoWeight + toGradeValue(mt[2]) * subjectData[0].semThreeWeight + toGradeValue("A") * subjectData[0].cwWeight;
+
+            var paMaxOverall = toMaxGradeValue(pa[0]) * subjectData[1].semOneWeight + toMaxGradeValue(pa[1]) * subjectData[1].semTwoWeight + toMaxGradeValue(pa[2]) * subjectData[1].semThreeWeight + toMaxGradeValue("A") * subjectData[1].cwWeight;
+            var pyMaxOverall = toMaxGradeValue(py[0]) * subjectData[0].semOneWeight + toMaxGradeValue(py[1]) * subjectData[0].semTwoWeight + toMaxGradeValue(py[2]) * subjectData[0].semThreeWeight + toMaxGradeValue("A") * subjectData[0].cwWeight;
+            var chMaxOverall = toMaxGradeValue(ch[0]) * subjectData[0].semOneWeight + toMaxGradeValue(ch[1]) * subjectData[0].semTwoWeight + toMaxGradeValue(ch[2]) * subjectData[0].semThreeWeight + toMaxGradeValue("A") * subjectData[0].cwWeight;
+            var mtMaxOverall = toMaxGradeValue(mt[0]) * subjectData[0].semOneWeight + toMaxGradeValue(mt[1]) * subjectData[0].semTwoWeight + toMaxGradeValue(mt[2]) * subjectData[0].semThreeWeight + toMaxGradeValue("A") * subjectData[0].cwWeight;
+        
+            console.log(paMinOverall,pyMinOverall,chMinOverall,mtMinOverall);
+            console.log(paMaxOverall,pyMaxOverall,chMaxOverall,mtMaxOverall)
+            //pa
+            document.getElementById('pal_g').innerHTML = "Overall Lowest Grade: "+ toOverallGrade(paMinOverall);
+            document.getElementById('pal_m').innerHTML = "Overall Lowest Marks: "+ paMinOverall;
+            document.getElementById('pal_p').innerHTML = "Overall Lowest Pointer: "+ toPointer(toOverallGrade(paMinOverall));
+
+            //py
+            document.getElementById('pyl_g').innerHTML = "Overall Lowest Grade: "+ toOverallGrade(pyMinOverall);
+            document.getElementById('pyl_m').innerHTML = "Overall Lowest Marks: "+ pyMinOverall;
+            document.getElementById('pyl_p').innerHTML = "Overall Lowest Pointer: "+ toPointer(toOverallGrade(pyMinOverall));
+            //ch
+            document.getElementById('chl_g').innerHTML = "Overall Lowest Grade: "+ toOverallGrade(chMinOverall);
+            document.getElementById('chl_m').innerHTML = "Overall Lowest Marks: "+ chMinOverall;
+            document.getElementById('chl_p').innerHTML = "Overall Lowest Pointer: "+ toPointer(toOverallGrade(chMinOverall));
+            //mt
+            document.getElementById('mtl_g').innerHTML = "Overall Lowest Grade: "+ toOverallGrade(mtMinOverall);
+            document.getElementById('mtl_m').innerHTML = "Overall Lowest Marks: "+ mtMinOverall;
+            document.getElementById('mtl_p').innerHTML = "Overall Lowest Pointer: "+ toPointer(toOverallGrade(mtMinOverall));
+            //OVERALL LOWEST
+            document.getElementById('l_p').innerHTML = "Overall Lowest TOTAL Pointer (CGPA) : "+ pointerCalculator(toPointer(toOverallGrade(paMinOverall)),toPointer(toOverallGrade(pyMinOverall)),toPointer(toOverallGrade(chMinOverall)),toPointer(toOverallGrade(mtMinOverall)))
+
+            //max
+            //pa
+            document.getElementById('pam_g').innerHTML = "Overall Highest Grade: "+ toOverallGrade(paMaxOverall);
+            document.getElementById('pam_m').innerHTML = "Overall Highest Marks: "+ paMaxOverall;
+            document.getElementById('pam_p').innerHTML = "Overall Highest Pointer: "+ toPointer(toOverallGrade(paMaxOverall));
+
+            //py
+            document.getElementById('pym_g').innerHTML = "Overall Highest Grade: "+ toOverallGrade(pyMaxOverall);
+            document.getElementById('pym_m').innerHTML = "Overall Highest Marks: "+ pyMaxOverall;
+            document.getElementById('pym_p').innerHTML = "Overall Highest Pointer: "+ toPointer(toOverallGrade(pyMaxOverall));
+            //ch
+            document.getElementById('chm_g').innerHTML = "Overall Highest Grade: "+ toOverallGrade(chMaxOverall);
+            document.getElementById('chm_m').innerHTML = "Overall Highest Marks: "+ chMaxOverall;
+            document.getElementById('chm_p').innerHTML = "Overall Highest Pointer: "+ toPointer(toOverallGrade(chMaxOverall));
+            //mt
+            document.getElementById('mtm_g').innerHTML = "Overall Highest Grade: "+ toOverallGrade(mtMaxOverall);
+            document.getElementById('mtm_m').innerHTML = "Overall Highest Marks: "+ mtMaxOverall;
+            document.getElementById('mtm_p').innerHTML = "Overall Highest Pointer: "+ toPointer(toOverallGrade(mtMaxOverall));
+            //OVERALL LOWEST
+            document.getElementById('m_p').innerHTML = "Overall Highest TOTAL Pointer (CGPA) : "+ pointerCalculator(toPointer(toOverallGrade(paMaxOverall)),toPointer(toOverallGrade(pyMaxOverall)),toPointer(toOverallGrade(chMaxOverall)),toPointer(toOverallGrade(mtMaxOverall)))
+        }
+        const scWeightage = (80/3)*(1/100); 
+        const subjectData = [
+            {
+                subjectName : 'Science',
+                semOneWeight : scWeightage,
+                semTwoWeight : scWeightage,
+                semThreeWeight : scWeightage,
+                cwWeight : 0.2,
+            },
+            {
+                subjectName : 'Pengajian Am',
+                semOneWeight : 0.29,
+                semTwoWeight : 0.22,
+                semThreeWeight : 0.29,
+                cwWeight : 0.2,
+            }
+        ]
+        //greater than ( smallest value)
+        // range = currentGradeValue to ( nextGradeValue - 1 )  eg : A- = (aMin to A-1) = 73 to 79.
+        const defaultGradeValue = {
+            max: 100,
+            A : 80 ,
+            aMin : 73 ,
+            bPlus : 67,
+            B: 60,
+            bMin : 53,
+            cPlus :  47,
+            C : 40,
+            cMin : 37,
+            D : 30,
+            dPlus : 33,
+            f : 0,
+        }
+        var gradeValue = {
+            max: 100,
+            A : 80 ,
+            aMin : 75 ,
+            bPlus : 70,
+            
+            B: 65,
+            bMin : 60,
+            cPlus :  55,
+            C : 50,
+            
+            cMin : 45,
+            D : 30,
+            dPlus : 40,
+            f : 0,
+            
+        }
+        const gradePointer = {
+            A : 4.0 ,
+            
+            aMin : 3.67 ,
+            bPlus : 3.33,
+            B: 3.0,
+            bMin : 2.67,
+            cPlus :  2.33,
+            C : 2.0,
+            cMin : 1.67,
+            D : 1.33,
+            dPlus : 1.0,
+            f : 0,
+        }
+        document.getElementById('a_h').value = gradeValue.max
+        document.getElementById('a_l').value = gradeValue.A
+        document.getElementById('aMin_h').value = gradeValue.A - 1
+        document.getElementById('aMin_l').value = gradeValue.aMin
+        document.getElementById('bPlus_h').value = gradeValue.aMin - 1
+        document.getElementById('bPlus_l').value = gradeValue.bPlus
+        document.getElementById('b_h').value = gradeValue.bPlus - 1
+        document.getElementById('b_l').value = gradeValue.B
+        document.getElementById('bMin_h').value = gradeValue.B -1
+        document.getElementById('bMin_l').value = gradeValue.bMin 
+        document.getElementById('cPlus_h').value = gradeValue.bMin -1
+        document.getElementById('cPlus_l').value = gradeValue.cPlus 
+        document.getElementById('c_h').value = gradeValue.cPlus -1
+        document.getElementById('c_l').value = gradeValue.C
+        document.getElementById('cMin_h').value = gradeValue.C -1
+        document.getElementById('cMin_l').value = gradeValue.cMin
+        document.getElementById('dPlus_h').value = gradeValue.cMin -1
+        document.getElementById('dPlus_l').value = gradeValue.dPlus 
+        document.getElementById('d_h').value = gradeValue.dPlus -1
+        document.getElementById('d_l').value = gradeValue.D 
+        document.getElementById('f_h').value = gradeValue.D -1
+        document.getElementById('f').value = gradeValue.f 
+
+        </script>
+        <div style="position:absolute;top:300px">
+        <div id="display">
+            <h2>Your minimum/lowest possible results:</h2>
+            <h2>Pengajian Am</h2>
+            <h3 id="pal_g">Overall Lowest Grade: </h3>
+            <h3 id="pal_m">Overall Lowest Marks: </h3>
+            <h3 id="pal_p">Overall Lowest Pointer: </h3>
+            <h2>Physics</h2>
+            <h3 id="pyl_g">Overall Lowest Grade: </h3>
+            <h3 id="pyl_m">Overall Lowest Marks: </h3>
+            <h3 id="pyl_p">Overall Lowest Pointer: </h3>
+            <h2>Chemistry</h2>
+            <h3 id="chl_g">Overall Lowest Grade: </h3>
+            <h3 id="chl_m">Overall Lowest Marks: </h3>
+            <h3 id="chl_p">Overall Lowest Pointer: </h3>
+            <h2>Math T</h2>
+            <h3 id="mtl_g">Overall Lowest Grade: </h3>
+            <h3 id="mtl_m">Overall Lowest Marks: </h3>
+            <h3 id="mtl_p">Overall Lowest Pointer: </h3>
+            <h1 id="l_p">Overall Lowest TOTAL Pointer (CGPA) :</h1>
+        </div>
+        <div id="display_max">
+            <h2>Your MAXIMUM/HIGHEST possible results:</h2>
+            <h2>Pengajian Am</h2>
+            <h3 id="pam_g">Overall Highest Grade: </h3>
+            <h3 id="pam_m">Overall Highest Marks: </h3>
+            <h3 id="pam_p">Overall Highest Pointer: </h3>
+            <h2>Physics</h2>
+            <h3 id="pym_g">Overall Highest Grade: </h3>
+            <h3 id="pym_m">Overall Highest Marks: </h3>
+            <h3 id="pym_p">Overall Highest Pointer: </h3>
+            <h2>Chemistry</h2>
+            <h3 id="chm_g">Overall Highest Grade: </h3>
+            <h3 id="chm_m">Overall Highest Marks: </h3>
+            <h3 id="chm_p">Overall Highest Pointer: </h3>
+            <h2>Math T</h2>
+            <h3 id="mtm_g">Overall Highest Grade: </h3>
+            <h3 id="mtm_m">Overall Highest Marks: </h3>
+            <h3 id="mtm_p">Overall Highest Pointer: </h3>
+            <h1 id="m_p">Overall Highest TOTAL Pointer (CGPA) :</h1>
+        </div>
+    </div>
+    </body>
+</html>
