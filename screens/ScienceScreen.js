@@ -9,16 +9,24 @@ class SubjectDisplay extends React.Component {
             sem2: 'S2',
             sem3: 'S3',
             cw: 'KK',
-            toogleColor:false,
-        
+            changeColor: false,
         }
     }
-    
+    changeNoColor(){
+        this.setState({
+          changeColor: false,  
+        })
+    }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.reset == true && this.state.changeColor ){
+            this.changeNoColor()
+        }
+    }
     render(){
         return(
             <View style={[styles.col,
                 {width:'95%',height:'15%',marginTop:10,
-            backgroundColor: this.state.toogleColor ? 'lightgreen':'#8789ff' ,
+            backgroundColor: this.state.changeColor ? 'lightgreen':'#8789ff' ,
             justifyContent:'center',
             alignItems:'center',
             borderRadius:3}]}>
@@ -108,11 +116,15 @@ class SubjectDisplay extends React.Component {
                 <Button title='Done' 
                 disabled={this.state.sem1 != 'S1' && this.state.sem2 != 'S2' && this.state.sem3 != 'S3' &&  this.state.cw !='KK' ? false : true}
                 onPress={()=>{
+                    this.setState({
+                        changeColor: true,
+                     })
+
                      subjectArray= [];
                      subjectArray.push(this.props.id,this.state.sem1,this.state.sem2,this.state.sem3,this.state.cw)
-                     alert(subjectArray);
                         this.props.getData(subjectArray,1);
-                        this.setState({toogleColor:true})
+                       
+                       
                 }} />
             </View>
         )
@@ -126,8 +138,10 @@ export default class ScienceScreen extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            no:0
+            no:0,
+            reset:false,
         }
+       
     }
     static navigationOptions = {
         title :'Fill in your results',
@@ -142,7 +156,7 @@ export default class ScienceScreen extends React.Component {
       //accesss to children data
     getDataFromChild = (data,index) => {
         //processData
-        
+        this.setState({reset:false})
         if(data[1]!=null && data[2]!=null &&data[3]!=null&&data[4]!=null){
         switch(data[0]){
             case 'pa':
@@ -184,30 +198,46 @@ export default class ScienceScreen extends React.Component {
     }
    
     }
+    
+ 
     //calculator all here
     //1- S1 - 2- S2 - 3- S3 - 4 - kk ; 0 = id
-    calculate(){
-    //minimum
-    
-    }
+
     render() {
         return (
             <View style={[styles.col,{alignItems:'center'}]}>
-                <SubjectDisplay id="pa" title="Pengajian Am" getData={this.getDataFromChild}/>
-                <SubjectDisplay id="mt" title="Math T" getData={this.getDataFromChild}/>
-                <SubjectDisplay id="py" title="Physics/Biology" getData={this.getDataFromChild}/>
-                <SubjectDisplay id="ch" title="Chemistry" getData={this.getDataFromChild}/>
-                <TouchableOpacity 
+                <SubjectDisplay id="pa" title="Pengajian Am" getData={this.getDataFromChild} reset={this.state.reset}/>
+                <SubjectDisplay id="mt" title="Math T" getData={this.getDataFromChild} reset={this.state.reset}/>
+                <SubjectDisplay id="py" title="Physics/Biology" getData={this.getDataFromChild} reset={this.state.reset} />
+                <SubjectDisplay id="ch" title="Chemistry" getData={this.getDataFromChild}  reset={this.state.reset}  />
+                <View style={styles.row}>
+                <TouchableOpacity disabled={this.state.no < 4 ? true : false}
                 onPress={()=>{this.props.navigation.navigate('Results',{
                    pa: padataArr,
                    py : pydataArr,
                    mt: mtdataArr,
                    ch: chdataArr,
-
                 })}}
-                style={{flex:1,width:'95%',marginTop:10,marginBottom:10,backgroundColor: this.state.no==4 ? 'lightgreen':'#8789ff',justifyContent:'center',alignItems:'center'}}>
+                style={{flex:1,width:'45%',marginTop:10,marginLeft:5,marginBottom:10,backgroundColor: this.state.no==4 ? 'lightgreen':'#8789ff',justifyContent:'center',alignItems:'center'}}>
                     <Text style={styles.fontSty}>Calculate</Text>
                 </TouchableOpacity>
+                <TouchableOpacity 
+                onPress={()=>{
+                    padataArr = [];
+                    pydataArr = [];
+                    mtdataArr = [];
+                    chdataArr = [];
+                    this.setState({
+                        no : 0,
+                        reset:true,
+                    })
+                  
+                }}
+                style={{flex:1,width:'45%',marginTop:10,marginBottom:10,backgroundColor: this.state.no==4 ? 'lightgreen':'#8789ff',justifyContent:'center',alignItems:'center'}}>
+                    <Text style={styles.fontSty}>Reset</Text>
+                </TouchableOpacity>
+                
+                </View>
           </View> 
         )
       }

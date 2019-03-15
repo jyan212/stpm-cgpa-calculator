@@ -212,14 +212,26 @@ const gradePointer = {
 var paMin,pyMin,chMin,mtMin
 var paMax,pyMax,chMax,mtMax;
 var pa,py,ch,mt
+class OverallResult extends React.Component {
+    render(){
+        return (
+            <View style={{flex:1,alignItems:'center',height:180,width:'95%',marginTop:10,marginBottom: this.props.isLastItem ? 5 : 0,backgroundColor: this.props.result=='min'? '#ff7770':'lightgreen',borderRadius:3 }}>
+                <Text style={[styles.fontSty,{marginTop:5}]}>{this.props.title}</Text>
+                <Text>{this.props.result=="min" ? 'Overall Minimum pointer: ' : 'Overall Maximum Pointer: '}{pointerCalculator(toPointer(toOverallGrade(this.props.m1)),toPointer(toOverallGrade(this.props.m2)),toPointer(toOverallGrade(this.props.m3)),toPointer(toOverallGrade(this.props.m4))) }</Text>
+                
+            </View>
+        );
+    }
+}
 class SubjectResult extends React.Component {
+    
     render(){
         return(
-            <View style={{flex:1,alignItems:'center',height:230,width:'95%',marginTop:10,marginBottom: this.props.isLastItem ? 5 : 0,backgroundColor: this.props.result=='min'? '#ff7770':'lightgreen',borderRadius:3 }}>
+            <View style={{flex:1,alignItems:'center',height:180,width:'95%',marginTop:10,marginBottom: this.props.isLastItem ? 5 : 0,backgroundColor: this.props.result=='min'? '#ff7770':'lightgreen',borderRadius:3 }}>
                 <Text style={[styles.fontSty,{marginTop:5}]}>{this.props.title}</Text>
                 <Text>{this.props.result=="min" ? 'Minimum marks: ' : 'Maximum marks: '}{this.props.marks}</Text>
-                <Text>{this.props.result=="min" ? 'Minimum grade: ' : 'Maximum grade: '}{toGradeValue(this.props.marks)}</Text>
-                <Text>{this.props.result=="min" ? 'Minimum pointer: ' : 'Maximum pointer: ' }{toPointer(toGradeValue(this.props.marks))}</Text>
+                <Text>{this.props.result=="min" ? 'Minimum grade: ' : 'Maximum grade: '}{toOverallGrade(this.props.marks)}</Text>
+                <Text>{this.props.result=="min" ? 'Minimum pointer: ' : 'Maximum pointer: ' }{toPointer(toOverallGrade(this.props.marks))}</Text>
             </View>
         )
     }
@@ -265,8 +277,8 @@ export default class ResultScreen extends React.Component {
                <SubjectResult title="Chemistry Maximum Result" result="max" isLastItem={false} marks={chMax} />
                <SubjectResult title="Math T Minimum Result" result="min" isLastItem={false} marks={mtMin} />
                <SubjectResult title="Math T Maximum Result" result="max" isLastItem={false} marks={mtMax} />
-               <SubjectResult title="Overall Min" result="min" isLastItem={false} marks={mtMax} />
-               <SubjectResult title="Overall Max" result="max" isLastItem={true} marks={mtMax} />
+               <OverallResult title="Overall Min" result="min" isLastItem={false} m1={mtMin} m2={paMin} m3={pyMin} m4={chMin}/>
+               <OverallResult title="Overall Max" result="max" isLastItem={true} m1={mtMax}  m2={paMax} m3={pyMax} m4={chMax}/>
 
             </View>
             </ScrollView>
